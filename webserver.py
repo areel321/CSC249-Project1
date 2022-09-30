@@ -8,6 +8,7 @@ serverSocket = socket(AF_INET, SOCK_STREAM)
 # -------------
 
   # TODO: Assign a port number
+  #this is an allison test comment
   #       Bind the socket to server address and server port
   #       Tell the socket to listen to at most 1 connection at a time
 
