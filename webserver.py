@@ -8,10 +8,11 @@ serverSocket = socket(AF_INET, SOCK_STREAM)
 # -------------
 
   # TODO: Assign a port number
-  #this is an allison test comment
+  
   #       Bind the socket to server address and server port
   #       Tell the socket to listen to at most 1 connection at a time
-
+serverSocket.bind(('131.229.198.120', 0))
+serverSocket.listen(1)
 # -----------
 # Fill in end
 # -----------
@@ -24,7 +25,7 @@ while True:
     # -------------
     # Fill in start
     # -------------
-    connectionSocket, addr = None # TODO: Set up a new connection from the client
+    connectionSocket, addr = serverSocket.accept() # TODO: Set up a new connection from the client
     # -----------
     # Fill in end
     # -----------
@@ -34,7 +35,7 @@ while True:
         # -------------
         # Fill in start
         # -------------
-        message = None # TODO: Receive the request message from the client
+        message = connectionSocket.recv() # TODO: Receive the request message from the client
         # -----------
         # Fill in end
         # -----------
@@ -50,7 +51,7 @@ while True:
         # -------------
         # Fill in start
         # -------------
-        outputdata = None # TODO: Store the entire contents of the requested file in a temporary buffer
+        outputdata = f.read() # TODO: Store the entire contents of the requested file in a temporary buffer
         # -----------
         # Fill in end
         # -----------
@@ -58,7 +59,7 @@ while True:
         # -------------
         # Fill in start
         # -------------
-            # TODO: Send one HTTP header line into socket
+        connectionSocket.send()    # TODO: Send one HTTP header line into socket
         # -----------
         # Fill in end
         # -----------
@@ -76,6 +77,7 @@ while True:
         # -------------
             # TODO: Send response message for file not found
             #       Close client socket
+            print("404") #this is to stop the indent error
         # -----------
         # Fill in end
         # -----------
