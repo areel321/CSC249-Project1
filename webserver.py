@@ -35,7 +35,7 @@ while True:
         # -------------
         # Fill in start
         # -------------
-        message = connectionSocket.recv() # TODO: Receive the request message from the client
+        message = connectionSocket.recv(1025) # TODO: Receive the request message from the client
         # -----------
         # Fill in end
         # -----------
@@ -43,6 +43,8 @@ while True:
         # Extract the path of the requested object from the message
 		# The path is the second part of HTTP header, identified by [1]
         filename = message.split()[1]
+
+        print(filename) #CHECK
 
         # Because the extracted path of the HTTP request includes 
 		# a character '\', we read the path from the second character
@@ -59,7 +61,7 @@ while True:
         # -------------
         # Fill in start
         # -------------
-        connectionSocket.send()    # TODO: Send one HTTP header line into socket
+        connectionSocket.send(bytes('HTTP/1.1 200 OK\r\n\r\n', 'UTF-8'))    # TODO: Send one HTTP header line into socket
         # -----------
         # Fill in end
         # -----------
@@ -77,7 +79,8 @@ while True:
         # -------------
             # TODO: Send response message for file not found
             #       Close client socket
-            print("404") #this is to stop the indent error
+            connectionSocket.send(bytes('file not found', 'UTF-8')) 
+            connectionSocket.close()
         # -----------
         # Fill in end
         # -----------
