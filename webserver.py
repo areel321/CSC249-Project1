@@ -61,7 +61,7 @@ while True:
         # -------------
         # Fill in start
         # -------------
-        connectionSocket.send(bytes('HTTP/1.1 200 OK\r\n\r\n', 'UTF-8'))    # TODO: Send one HTTP header line into socket
+        connectionSocket.send(bytes('HTTP/1.1 200 OK\r\n', 'UTF-8'))    # TODO: Send one HTTP header line into socket
         # -----------
         # Fill in end
         # -----------
