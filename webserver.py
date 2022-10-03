@@ -11,7 +11,7 @@ serverSocket = socket(AF_INET, SOCK_STREAM)
   
   #       Bind the socket to server address and server port
   #       Tell the socket to listen to at most 1 connection at a time
-serverSocket.bind(('131.229.198.120', 0))
+serverSocket.bind(('131.229.198.120', 1024))
 serverSocket.listen(1)
 # -----------
 # Fill in end
