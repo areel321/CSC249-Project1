@@ -68,6 +68,7 @@ while True:
         # Fill in start
         # -------------
         # have to encode str to convert to bytes
+        # I used https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml to get the correct response message
         connectionSocket.send('HTTP/1.1 200 OK'.encode())    # TODO: Send one HTTP header line into socket
         # -----------
         # Fill in end
@@ -86,7 +87,7 @@ while True:
         # -------------
             # TODO: Send response message for file not found
             #       Close client socket
-            connectionSocket.send('file not found'.encode()) 
+            connectionSocket.send('HTTP/1.1 404 Not Found'.encode()) 
             connectionSocket.close()
         # -----------
         # Fill in end
