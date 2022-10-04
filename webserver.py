@@ -1,6 +1,7 @@
-## I consulted https://docs.python.org/3/library/socket.html and https://docs.python.org/3/howto/sockets.html on how to use sockets and socket funtions.  
+__author__ = "Allison Reel"
+# I consulted https://docs.python.org/3/library/socket.html and https://docs.python.org/3/howto/sockets.html on how to use sockets and socket funtions.  
 # I also used https://www.w3schools.com/html/html_editors.asp and https://www.w3schools.com/html/html_styles.asp on how to create and read my HTML file.  
-## I worked with my classmates 
+# I worked with my classmates Hamssatou Maiga, Larissa Savitsky, and Paola Calle to discuss our programs
 
 from socket import *
 import sys # In order to terminate the program
@@ -49,6 +50,7 @@ while True:
         
         # Extract the path of the requested object from the message
 		# The path is the second part of HTTP header, identified by [1]
+
         filename = message.split()[1]
 
 
@@ -69,7 +71,7 @@ while True:
         # -------------
         # have to encode str to convert to bytes
         # I used https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml to get the correct response message
-        connectionSocket.send('HTTP/1.1 200 OK'.encode())    # TODO: Send one HTTP header line into socket
+        connectionSocket.send('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'.encode())    # TODO: Send one HTTP header line into socket
         # -----------
         # Fill in end
         # -----------
