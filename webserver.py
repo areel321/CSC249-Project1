@@ -68,7 +68,7 @@ while True:
         # Fill in start
         # -------------
         # have to encode str to convert to bytes
-        connectionSocket.send('HTTP/1.1 200 OK\r\n'.encode())    # TODO: Send one HTTP header line into socket
+        connectionSocket.send('HTTP/1.1 200 OK'.encode())    # TODO: Send one HTTP header line into socket
         # -----------
         # Fill in end
         # -----------
