@@ -41,7 +41,8 @@ while True:
     # -----------
     # Fill in end
     # -----------
-    # #print_lock = threading.Lock()
+    # 
+    print_lock = threading.Lock()
     def multiThread(connectionSocket):
         while True:
             message = connectionSocket.recv(4096)
@@ -57,7 +58,7 @@ while True:
         connectionSocket.close()
 
     try:
-        #print_lock.acquire()
+        print_lock.acquire()
         print("connected")
         start_new_thread(multiThread, (connectionSocket,))
         LMAO+=1
