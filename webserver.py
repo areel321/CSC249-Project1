@@ -12,6 +12,7 @@ from _thread import *
 
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
+connections = 0
 
 # -------------
 # Fill in start
@@ -22,13 +23,14 @@ serverSocket = socket(AF_INET, SOCK_STREAM)
   #       Bind the socket to server address and server port
   #       Tell the socket to listen to at most 1 connection at a time
   # binded to my computer's ip address, and I read in the documentation that ports above 1023 are non-privledged 
-serverSocket.bind(('', 1024))
+serverPort = 1024 + connections 
+serverSocket.bind(('', serverPort))
 # listen to only one connection
 serverSocket.listen(1)
 # -----------
 # Fill in end
 # -----------
-LMAO = 0
+
 while True:
     
     # Establish the connection
@@ -45,7 +47,8 @@ while True:
     print_lock = threading.Lock()
     def multiThread(connectionSocket):
         while True:
-            message = connectionSocket.recv(4096)
+            connectionPort = 4096 + connections
+            message = connectionSocket.recv(connectionPort)
             if not message:
                 break
             filename = message.split()[1]
@@ -61,8 +64,8 @@ while True:
         print_lock.acquire()
         print("connected")
         start_new_thread(multiThread, (connectionSocket,))
-        LMAO+=1
-        print(LMAO)
+        connections+=1
+        print(connections)
         # -------------
         # Fill in start
         # -------------
