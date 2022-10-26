@@ -1,0 +1,2 @@
+I found this project to be incredibly daunting at the beginning, but the support code and breaking it up into small chunks really helped. 
+I also found working with others in a group to be helpful for phase 1.  We talked about the encoding of the data and how to properly display the correct output in our browser

@@ -1,6 +1,7 @@
 __author__ = "Allison Reel"
 # I consulted https://docs.python.org/3/library/socket.html and https://docs.python.org/3/howto/sockets.html on how to use sockets and socket funtions.  
-# I also used https://www.w3schools.com/html/html_editors.asp and https://www.w3schools.com/html/html_styles.asp on how to create and read my HTML file.  
+# I also used https://www.w3schools.com/html/html_editors.asp and https://www.w3schools.com/html/html_styles.asp on how to create and read my HTML file. 
+# for the multithreaded server I used https://docs.python.org/3/library/threading.html#lock-objects and https://realpython.com/intro-to-python-threading/#working-with-many-threads as resources for threading in python 
 # I worked with my classmates Hamssatou Maiga, Larissa Savitsky, and Paola Calle to discuss our programs
 
 from socket import *
@@ -12,7 +13,7 @@ from _thread import *
 
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
-connections = 0
+connections = 0 #keep track of number of connections  
 
 # -------------
 # Fill in start
@@ -23,7 +24,7 @@ connections = 0
   #       Bind the socket to server address and server port
   #       Tell the socket to listen to at most 1 connection at a time
   # binded to my computer's ip address, and I read in the documentation that ports above 1023 are non-privledged 
-serverPort = 1024 + connections 
+serverPort = 1024 + connections #create new port for new connection
 serverSocket.bind(('', serverPort))
 # listen to only one connection
 serverSocket.listen(1)
@@ -44,13 +45,14 @@ while True:
     # Fill in end
     # -----------
     # 
-    print_lock = threading.Lock()
+    print_lock = threading.Lock() #lock the multithread
     def multiThread(connectionSocket):
         while True:
-            connectionPort = 4096 + connections
-            message = connectionSocket.recv(connectionPort)
+            connectionPort = 4096 + connections #create a new port for the new connection
+            message = connectionSocket.recv(connectionPort) #recieve the message at the port
             if not message:
                 break
+            #read the file and send it to be displayed 
             filename = message.split()[1]
             f = open(filename[1:])
             outputdata = f.read()
@@ -58,12 +60,15 @@ while True:
             for i in range(0, len(outputdata)):
              connectionSocket.send(outputdata[i].encode())
             connectionSocket.send("\r\n".encode())
+        #close the connection 
         connectionSocket.close()
 
     try:
         print_lock.acquire()
         print("connected")
+        #run the multithread to allow for multiple connections
         start_new_thread(multiThread, (connectionSocket,))
+        #increase the connections counter
         connections+=1
         print(connections)
         # -------------
