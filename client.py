@@ -11,9 +11,13 @@ server_host = ''
 server_port = 1024
 filename = 'HelloWorld.html'
 
+#add / to the beginning of the filename
 filename = str('/'+filename)
+#start the HTTP connection
 conn = http.client.HTTPConnection(str(server_host), server_port)
+#use get request
 conn.request("GET", filename)
+#recieve and read contents of the server
 response = conn.getresponse()
 data = response.read()
 
