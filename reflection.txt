@@ -1,2 +1,11 @@
-I found this project to be incredibly daunting at the beginning, but the support code and breaking it up into small chunks really helped. 
-I also found working with others in a group to be helpful for phase 1.  We talked about the encoding of the data and how to properly display the correct output in our browser
+I found this project to be incredibly daunting at the beginning, but the support code and breaking it up into small chunks 
+really helped. I also found working with others in a group to be helpful for phase 1.  In my group, we talked about the encoding of the 
+data and how to properly display the correct output in our browser.  At first, when loading my webserver it would sometimes display the html file and 
+not just the heading and body. Adjusting line 59 to include the content type fixed this though. 
+For phase 2 and the multithreaded server, I was really lost because I had never worked with multithreading before. The python documentation and 
+website I cited in the weberserver header were very helpful in figuring out why I needed to lock the thread and how to implement a working method. I also
+added a connections variable to keep track of the number of hosts connected to the server and added a print statement to verify that they are connected.
+This was helpful in making sure the server could support multiple threads for multiple connections.
+In phase 3, I found the python HTTP documentation helpful for creating a client-side to the server.  This phase of my project doesn't completely work as
+I couldn't quite figure out how to accept input from the command line. Commented out are my attempts to index the arguments given into variables server_host, 
+server_port, and filename.  When running client.py with the variables hardcoded though, I'm able to connect to the server.  
