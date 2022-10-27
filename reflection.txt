@@ -1,7 +1,7 @@
 I found this project to be incredibly daunting at the beginning, but the support code and breaking it up into small chunks 
 really helped. I also found working with others in a group to be helpful for phase 1.  In my group, we talked about the encoding of the 
 data and how to properly display the correct output in our browser.  At first, when loading my webserver it would sometimes display the html file and 
-not just the heading and body. Adjusting line 59 to include the content type fixed this though. 
+without the style. Adjusting line 59 to include the content type fixed this though. 
 For phase 2 and the multithreaded server, I was really lost because I had never worked with multithreading before. The python documentation and 
 website I cited in the weberserver header were very helpful in figuring out why I needed to lock the thread and how to implement a working method. I also
 added a connections variable to keep track of the number of hosts connected to the server and added a print statement to verify that they are connected.
