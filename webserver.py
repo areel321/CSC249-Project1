@@ -1,7 +1,7 @@
 __author__ = "Allison Reel"
 # I consulted https://docs.python.org/3/library/socket.html and https://docs.python.org/3/howto/sockets.html on how to use sockets and socket funtions.  
 # I also used https://www.w3schools.com/html/html_editors.asp and https://www.w3schools.com/html/html_styles.asp on how to create and read my HTML file. 
-# for the multithreaded server I used https://docs.python.org/3/library/threading.html#lock-objects and https://realpython.com/intro-to-python-threading/#working-with-many-threads as resources for threading in python 
+# for the multithreaded server I used https://docs.python.org/3/library/threading.html#lock-objects, https://docs.python.org/3/library/_thread.html, and https://realpython.com/intro-to-python-threading/#working-with-many-threads as resources for threading in python 
 # I worked with my classmates Hamssatou Maiga, Larissa Savitsky, and Paola Calle to discuss our programs
 
 from socket import *
