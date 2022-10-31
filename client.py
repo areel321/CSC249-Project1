@@ -20,5 +20,5 @@ try:
     print('recieved')
 
 except IOError:
-    print("error")
+    print('error')
 

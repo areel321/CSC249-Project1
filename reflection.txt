@@ -7,6 +7,7 @@ website I cited in the weberserver header were very helpful in figuring out why 
 added a connections variable to keep track of the number of hosts connected to the server and added a print statement to verify that they are connected.
 This was helpful in making sure the server could support multiple threads for multiple connections. I tested this phase by opening my server in mine and a friend's 
 browsers at the same time.  
-In phase 3, I found the python HTTP documentation helpful for creating a client-side to the server.  This phase of my project doesn't completely work as
+In phase 3, I found the python socket documentation helpful again for creating a client-side to the server.  This phase of my project doesn't completely work as
 I couldn't quite figure out how to accept input from the command line. Commented out are my attempts to index the arguments given into variables server_host, 
-server_port, and filename.  When running client.py with the variables hardcoded though, I'm able to connect to the server.  
+server_port, and filename.  When running client.py with the variables hardcoded though, I'm able to connect to the server, but I get a server reset error that 
+I'm unable to figure out.  
