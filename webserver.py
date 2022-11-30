@@ -24,7 +24,7 @@ connections = 0 #keep track of number of connections
   #       Bind the socket to server address and server port
   #       Tell the socket to listen to at most 1 connection at a time
   # binded to my computer's ip address, and I read in the documentation that ports above 1023 are non-privledged 
-serverPort = 1024 + connections #create new port for new connection
+serverPort = 1024 #create new port for new connection
 serverSocket.bind(('', serverPort))
 # listen to only one connection
 serverSocket.listen(1)
