@@ -13,7 +13,8 @@ from _thread import *
 
 
 serverSocket = socket(AF_INET, SOCK_STREAM)
-connections = 0 #keep track of number of connections  
+connections = 0 #keep track of number of connections
+clientIPList = []  #create list of connected client IP addresses
 
 # -------------
 # Fill in start
@@ -41,10 +42,23 @@ while True:
     # Fill in start
     # -------------
     connectionSocket, addr = serverSocket.accept() # TODO: Set up a new connection from the client
+    
+    clientIP = addr[0] #get client IP address
+    exists = clientIPList.count(clientIP) #see if IP address is already in the list of connected IP addresses
+    
+    if exists > 1: #close the program if an IP address makes more than 2 requests
+        print("error: too many requests made")
+        serverSocket.close()
+        sys.exit()
+    else:
+        print("client ip address: "+clientIP)
+        clientIPList.append(clientIP)
+
     # -----------
     # Fill in end
     # -----------
     # 
+    
     print_lock = threading.Lock() #lock the multithread
     def multiThread(connectionSocket):
         while True:
@@ -60,6 +74,8 @@ while True:
             for i in range(0, len(outputdata)):
              connectionSocket.send(outputdata[i].encode())
             connectionSocket.send("\r\n".encode())
+        
+              
         #close the connection 
         connectionSocket.close()
 
