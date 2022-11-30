@@ -9,7 +9,7 @@ import sys
 #filename = sys.argv[3]
 
 #hardcoded variables
-server_host = '131.229.198.171'
+server_host = '131.229.158.218'
 server_port = 1024
 filename = 'HelloWorld.html'
 
