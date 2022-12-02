@@ -48,100 +48,100 @@ while True:
     
     if exists > 1: #close the program if an IP address makes more than 2 requests
         print("error: too many requests made")
-        serverSocket.close()
-        sys.exit()
+        connectionSocket.send('HTTP/1.1 429 Too Many Requests\nContent-Type: text/html\n\n'.encode())
+        
     else:
         print("client ip address: "+clientIP)
         clientIPList.append(clientIP)
 
-    # -----------
-    # Fill in end
-    # -----------
-    # 
-    
+        # -----------
+        # Fill in end
+        # -----------
+        # 
+        
     print_lock = threading.Lock() #lock the multithread
     def multiThread(connectionSocket):
-        while True:
-            connectionPort = 4096 + connections #create a new port for the new connection
-            message = connectionSocket.recv(connectionPort) #recieve the message at the port
-            if not message:
-                break
-            #read the file and send it to be displayed 
-            filename = message.split()[1]
-            f = open(filename[1:])
-            outputdata = f.read()
-            connectionSocket.send('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'.encode())
-            for i in range(0, len(outputdata)):
-             connectionSocket.send(outputdata[i].encode())
-            connectionSocket.send("\r\n".encode())
-        
-              
-        #close the connection 
-        connectionSocket.close()
+            while True:
+                connectionPort = 4096 + connections #create a new port for the new connection
+                message = connectionSocket.recv(connectionPort) #recieve the message at the port
+                if not message:
+                    break
+                #read the file and send it to be displayed 
+                filename = message.split()[1]
+                f = open(filename[1:])
+                outputdata = f.read()
+                connectionSocket.send('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'.encode())
+                for i in range(0, len(outputdata)):
+                    connectionSocket.send(outputdata[i].encode())
+                    connectionSocket.send("\r\n".encode())
+            
+                
+            #close the connection 
+            connectionSocket.close()
 
     try:
-        print_lock.acquire()
-        print("connected")
-        #run the multithread to allow for multiple connections
-        start_new_thread(multiThread, (connectionSocket,))
-        #increase the connections counter
-        connections+=1
-        print(connections)
-        # -------------
-        # Fill in start
-        # -------------
-        # the socket documentation recommended using a power of two in recv
-        ##message = connectionSocket.recv(4096) # TODO: Receive the request message from the client
-        # -----------
-        # Fill in end
-        # -----------
-        
-        # Extract the path of the requested object from the message
-		# The path is the second part of HTTP header, identified by [1]
+            print_lock.acquire()
+            print("connected")
+            #run the multithread to allow for multiple connections
+            start_new_thread(multiThread, (connectionSocket,))
+            #increase the connections counter
+            connections+=1
+            print(connections)
+            # -------------
+            # Fill in start
+            # -------------
+            # the socket documentation recommended using a power of two in recv
+            ##message = connectionSocket.recv(4096) # TODO: Receive the request message from the client
+            # -----------
+            # Fill in end
+            # -----------
+            
+            # Extract the path of the requested object from the message
+            # The path is the second part of HTTP header, identified by [1]
 
-        ##filename = message.split()[1]
+            ##filename = message.split()[1]
 
 
-        # Because the extracted path of the HTTP request includes 
-		# a character '\', we read the path from the second character
-        ##f = open(filename[1:])
-        
-        # -------------
-        # Fill in start
-        # -------------
-        ##outputdata = f.read() # TODO: Store the entire contents of the requested file in a temporary buffer
-        # -----------
-        # Fill in end
-        # -----------
+            # Because the extracted path of the HTTP request includes 
+            # a character '\', we read the path from the second character
+            ##f = open(filename[1:])
+            
+            # -------------
+            # Fill in start
+            # -------------
+            ##outputdata = f.read() # TODO: Store the entire contents of the requested file in a temporary buffer
+            # -----------
+            # Fill in end
+            # -----------
 
-        # -------------
-        # Fill in start
-        # -------------
-        # have to encode str to convert to bytes
-        # I used https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml to get the correct response message
-        ##connectionSocket.send('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'.encode())    # TODO: Send one HTTP header line into socket
-        # -----------
-        # Fill in end
-        # -----------
+            # -------------
+            # Fill in start
+            # -------------
+            # have to encode str to convert to bytes
+            # I used https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml to get the correct response message
+            ##connectionSocket.send('HTTP/1.1 200 OK\nContent-Type: text/html\n\n'.encode())    # TODO: Send one HTTP header line into socket
+            # -----------
+            # Fill in end
+            # -----------
 
-        # Send the content of the requested file to the client
-        ##for i in range(0, len(outputdata)):
-          ##  connectionSocket.send(outputdata[i].encode())
-        ##connectionSocket.send("\r\n".encode())
+            # Send the content of the requested file to the client
+            ##for i in range(0, len(outputdata)):
+            ##  connectionSocket.send(outputdata[i].encode())
+            ##connectionSocket.send("\r\n".encode())
 
-        ##connectionSocket.close()
+            ##connectionSocket.close()
 
     except IOError:
-        # -------------
-        # Fill in start
-        # -------------
-            # TODO: Send response message for file not found
-            #       Close client socket
-            connectionSocket.send('HTTP/1.1 404 Not Found'.encode()) 
-            connectionSocket.close()
-        # -----------
-        # Fill in end
-        # -----------
-
+            # -------------
+            # Fill in start
+            # -------------
+                # TODO: Send response message for file not found
+                #       Close client socket
+                connectionSocket.send('HTTP/1.1 404 Not Found'.encode()) 
+                connectionSocket.close()
+            # -----------
+            # Fill in end
+            # -----------            
+        
 serverSocket.close()
 sys.exit()  #Terminate the program after sending the corresponding data
